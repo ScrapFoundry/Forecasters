@@ -1,0 +1,16 @@
+# Alternative to pm2. Copy to /etc/systemd/system/, edit User and WorkingDirectory, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now forecasters-worker
+[Unit]
+Description=FORECASTERS pipeline worker
+After=network-online.target
+
+[Service]
+User=forecasters
+WorkingDirectory=/opt/forecasters
+ExecStart=/usr/bin/node --conditions=react-server --env-file=.env --import tsx worker/index.ts
+Restart=always
+RestartSec=30
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
