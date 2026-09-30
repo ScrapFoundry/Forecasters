@@ -1,0 +1,358 @@
+/* ================= NAV ================= */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(180deg, #0d0d0c, #080807);
+  border-bottom: 1px solid #22221f;
+  box-shadow: 0 1px 0 #000, 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.navInner {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  height: var(--nav-h);
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.24em;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.link {
+  position: relative;
+  padding: 6px 10px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  transition: color 120ms ease;
+  white-space: nowrap;
+}
+
+.link sup {
+  font-size: 8px;
+  margin-left: 2px;
+  opacity: 0.6;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+.link.active {
+  color: var(--ph);
+}
+
+.link.active::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -12px;
+  height: 2px;
+  background: var(--ph);
+  box-shadow: 0 0 8px var(--ph);
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.sys {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.burger {
+  display: none;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-2);
+  color: var(--text);
+}
+
+.mobile {
+  border-top: 1px solid var(--line);
+  background: var(--term);
+  color: var(--ph);
+  padding: 12px var(--gutter) 18px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-shadow: var(--ph-glow);
+}
+
+.mobileHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed rgba(57, 255, 106, 0.25);
+  font-size: 11px;
+}
+
+.mobile ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.mobile a {
+  display: block;
+  padding: 8px 0;
+}
+
+@media (max-width: 1180px) {
+  .sys {
+    display: none;
+  }
+}
+
+@media (max-width: 1020px) {
+  .links {
+    display: none;
+  }
+  .burger {
+    display: inline-flex;
+  }
+  .navInner {
+    justify-content: space-between;
+  }
+}
+
+/* ================= CONNECT ================= */
+.connectWrap {
+  position: relative;
+}
+
+.connect {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--hw-ink);
+  background: linear-gradient(180deg, #e3e3dd, #bcbcb6);
+  border: 1px solid #50504b;
+  box-shadow: inset 1px 1px 0 #f7f7f2, inset -1px -1px 0 #9b9b95;
+  white-space: nowrap;
+}
+
+.connect:disabled {
+  opacity: 0.7;
+}
+
+.connected {
+  color: var(--ph);
+  background: var(--term);
+  border-color: var(--ph-dim);
+  box-shadow: none;
+}
+
+.connDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ph);
+  box-shadow: 0 0 6px var(--ph);
+}
+
+.connectMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 280px;
+  max-width: calc(100vw - 28px);
+  padding: 10px;
+  background: var(--term);
+  border: 1px solid var(--ph-dim);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
+  color: var(--ph);
+  z-index: 60;
+  display: grid;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.connectMenuHead {
+  color: var(--ph-2);
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(57, 255, 106, 0.25);
+}
+
+.connectMenuRow {
+  word-break: break-all;
+  color: var(--text);
+}
+
+.connectErr {
+  color: var(--err);
+}
+
+.connectMenuBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border: 1px solid rgba(57, 255, 106, 0.25);
+  text-align: left;
+}
+
+.connectMenuBtn:hover {
+  background: rgba(57, 255, 106, 0.08);
+}
+
+.connectMenuFoot {
+  color: var(--muted);
+  font-size: 9.5px;
+}
+
+/* ================= STATUS BAR ================= */
+.status {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  background: #070707;
+  border-top: 1px solid #22221f;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+}
+
+.statusInner {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  min-height: var(--status-h);
+  padding: 6px var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.statusInner::-webkit-scrollbar {
+  display: none;
+}
+
+.statusTitle {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.okTone {
+  color: var(--ph);
+}
+
+.warnTone {
+  color: var(--warn);
+}
+
+.errTone {
+  color: var(--err);
+}
+
+.statusSync {
+  margin-left: auto;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.statusDemo {
+  color: #121210;
+  background: var(--warn);
+  padding: 1px 7px;
+  font-weight: 600;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  border-top: 1px solid var(--line);
+  margin-top: 64px;
+  background: #070707;
+}
+
+.footerInner {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 28px var(--gutter) 34px;
+  display: grid;
+  gap: 16px;
+}
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+}
+
+.footerLinks a {
+  color: var(--muted);
+}
+
+.footerLinks a:hover {
+  color: var(--text);
+}
+
+.footerMuted {
+  color: var(--muted-2);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+/* ================= PAGE FRAME ================= */
+.main {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 28px var(--gutter) 0;
+  min-height: calc(100vh - var(--nav-h) - var(--status-h));
+}

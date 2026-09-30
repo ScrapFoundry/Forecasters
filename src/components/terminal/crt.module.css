@@ -1,0 +1,280 @@
+/* ================= CRT ================= */
+
+.bezel {
+  position: relative;
+  padding: 18px;
+  background: linear-gradient(180deg, #d9d9d3, #bdbdb7 70%, #a9a9a3);
+  border: 1px solid #62625d;
+  border-radius: 10px;
+  box-shadow:
+    inset 2px 2px 0 #f1f1eb,
+    inset -2px -2px 0 #8f8f89,
+    0 2px 0 #000,
+    0 24px 60px rgba(0, 0, 0, 0.7);
+}
+
+.bezel::after {
+  /* recessed frame around the glass */
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border-radius: 16px;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px #6b6b66, inset 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.glass {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px / 18px;
+  background:
+    radial-gradient(ellipse 120% 100% at 50% 45%, #041204 0%, #020802 55%, #010401 100%);
+  color: var(--ph);
+  box-shadow:
+    inset 0 0 0 1px #000,
+    inset 0 0 40px rgba(0, 0, 0, 0.95),
+    inset 0 0 120px rgba(0, 0, 0, 0.6);
+  isolation: isolate;
+}
+
+.bare .glass {
+  border-radius: 6px;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 1px rgba(57, 255, 106, 0.6), 0 0 8px rgba(57, 255, 106, 0.22);
+}
+
+.flicker .content {
+  animation: crt-flicker 6s infinite steps(1);
+}
+
+/* scanlines */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.32) 2px 3px);
+  mix-blend-mode: multiply;
+}
+
+/* curvature vignette + glass highlight */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 140% 110% at 50% 50%, transparent 58%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0%, transparent 28%);
+}
+
+.noise {
+  position: absolute;
+  inset: -50%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: crt-noise 0.9s steps(4) infinite;
+}
+
+.band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(57, 255, 106, 0.035) 45%, rgba(57, 255, 106, 0.07) 50%, transparent);
+  animation: crt-band 9s linear infinite;
+}
+
+.glitch .content {
+  animation: crt-glitch 11s infinite;
+}
+
+.powerLed {
+  position: absolute;
+  right: 22px;
+  bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #3a3a36;
+}
+
+.powerLed i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ph);
+  box-shadow: 0 0 6px var(--ph);
+}
+
+.brand {
+  position: absolute;
+  left: 24px;
+  bottom: 3px;
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: #4a4a45;
+}
+
+@keyframes crt-flicker {
+  0% { opacity: 1; }
+  47% { opacity: 1; }
+  48% { opacity: 0.94; }
+  49% { opacity: 1; }
+  83% { opacity: 1; }
+  84% { opacity: 0.97; }
+  85% { opacity: 1; }
+}
+
+@keyframes crt-noise {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-8%, 5%); }
+  50% { transform: translate(6%, -7%); }
+  75% { transform: translate(-4%, -3%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes crt-band {
+  0% { top: -20%; }
+  100% { top: 110%; }
+}
+
+@keyframes crt-glitch {
+  0%, 96.9%, 100% { transform: none; filter: none; }
+  97% { transform: translateX(2px) skewX(-0.6deg); filter: brightness(1.2); }
+  97.4% { transform: translateX(-1px); }
+  97.8% { transform: none; }
+}
+
+/* ================= Terminal window ================= */
+.term {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  font-family: var(--font-mono);
+}
+
+.termBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid rgba(57, 255, 106, 0.18);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.termTitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.termStatus {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--ph-2);
+  flex-shrink: 0;
+}
+
+.termBody {
+  flex: 1;
+  min-height: 0;
+  padding: 12px 16px 16px;
+  overflow: hidden;
+}
+
+/* ================= Log ================= */
+.log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.logLine {
+  display: grid;
+  grid-template-columns: 14px 5.2ch 1fr;
+  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: fc-fade-in 400ms ease both;
+}
+
+.logLine a:hover {
+  text-decoration: underline;
+}
+
+.logPrompt {
+  color: var(--ph-dim);
+}
+
+.logTime {
+  color: var(--ph-2);
+  opacity: 0.8;
+  font-variant-numeric: tabular-nums;
+}
+
+.logText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.k-seat .logText { color: var(--ph); }
+.k-job-posted .logText { color: #b9f5c8; }
+.k-job-completed .logText { color: var(--ph); }
+.k-job-blocked .logText { color: var(--warn); text-shadow: none; }
+.k-oracle-called .logText { color: #d7ffe0; }
+.k-oracle-attested .logText { color: var(--ph); font-weight: 600; }
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.05em;
+  vertical-align: -0.15em;
+  background: var(--ph);
+  box-shadow: 0 0 6px var(--ph);
+  animation: fc-blink 1.05s steps(1) infinite;
+}
+
+@media (max-width: 720px) {
+  .bezel {
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .bezel::after {
+    inset: 5px;
+  }
+  .log {
+    font-size: 11.5px;
+  }
+  .powerLed,
+  .brand {
+    display: none;
+  }
+}

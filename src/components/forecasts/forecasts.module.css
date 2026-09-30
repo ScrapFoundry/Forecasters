@@ -1,0 +1,327 @@
+/* ================= FORECAST CARD ================= */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px 14px;
+  background: linear-gradient(180deg, #0f0f0e, #0a0a09);
+  border: 1px solid var(--line-2);
+  box-shadow: inset 0 1px 0 #1d1d1b;
+  transition: border-color 140ms ease, transform 140ms ease;
+  min-width: 0;
+}
+
+.card:hover {
+  border-color: var(--hw-4);
+}
+
+.cardLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  align-items: center;
+}
+
+.cardTopRight {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.question {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  min-height: 2.4em;
+}
+
+.question.lg {
+  font-size: clamp(22px, 3vw, 36px);
+}
+
+.bars {
+  display: grid;
+  gap: 6px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 3.5ch minmax(0, 1fr) 6ch;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.barRow .pct {
+  text-align: right;
+}
+
+.barRow.lead {
+  color: var(--ph);
+}
+
+.barRow.lead .pct {
+  text-shadow: var(--ph-glow);
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line-2);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.meta b {
+  display: block;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.statusOpen {
+  color: var(--ph);
+}
+
+.statusClosed {
+  color: var(--warn);
+}
+
+.statusResolved {
+  color: var(--text);
+}
+
+.result {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.yes {
+  color: var(--ph);
+}
+
+.no {
+  color: var(--err);
+}
+
+/* ================= SIGNAL BOARD ================= */
+.board {
+  display: grid;
+  gap: 0;
+}
+
+.boardRow {
+  display: grid;
+  grid-template-columns: 7ch minmax(0, 1fr) minmax(0, 1.1fr) 6ch 7ch;
+  gap: 14px;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(57, 255, 106, 0.1);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.boardRow:last-child {
+  border-bottom: 0;
+}
+
+.boardQ {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #d7ffe0;
+}
+
+.boardQ a:hover {
+  text-decoration: underline;
+}
+
+.boardOut {
+  font-weight: 600;
+}
+
+.boardN {
+  color: var(--ph-2);
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .boardRow {
+    grid-template-columns: 6ch minmax(0, 1fr) 7ch;
+  }
+  .boardRow > :nth-child(3),
+  .boardRow > :nth-child(4) {
+    display: none;
+  }
+}
+
+/* ================= RECORD TABLE ================= */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line-2);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table .num {
+  text-align: right;
+}
+
+.agentId {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.agentId:hover {
+  color: var(--ph);
+}
+
+.rank {
+  color: var(--muted-2);
+  width: 3ch;
+}
+
+.pos {
+  color: var(--ph);
+}
+
+.neg {
+  color: var(--err);
+}
+
+.tier {
+  display: inline-block;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  padding: 1px 6px;
+  border: 1px solid var(--line-2);
+  color: var(--hw-2);
+}
+
+.tier.sentinel {
+  color: var(--ph);
+  border-color: var(--ph-dim);
+}
+
+.tier.keeper {
+  color: var(--warn);
+  border-color: rgba(216, 201, 74, 0.5);
+}
+
+/* ================= PREDICTION LIST ================= */
+.predList {
+  display: grid;
+  gap: 0;
+}
+
+.pred {
+  display: grid;
+  grid-template-columns: 13ch 4ch minmax(0, 1fr) 5ch 6ch;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(57, 255, 106, 0.1);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pred > * {
+  white-space: nowrap;
+}
+
+.pred:last-child {
+  border-bottom: 0;
+}
+
+.pred a:hover {
+  text-decoration: underline;
+}
+
+.predMark {
+  text-align: right;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .pred {
+    grid-template-columns: 12ch 4ch 5ch 5ch;
+  }
+  .pred > :nth-child(3) {
+    display: none;
+  }
+}
+
+/* ================= FILTER BAR ================= */
+.filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.filter {
+  padding: 6px 12px;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  border: 1px solid var(--line-2);
+  color: var(--muted);
+}
+
+.filter:hover {
+  color: var(--text);
+}
+
+.filter[aria-pressed="true"] {
+  color: var(--ph);
+  border-color: var(--ph-dim);
+  background: rgba(57, 255, 106, 0.05);
+}
