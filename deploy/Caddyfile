@@ -1,0 +1,6 @@
+# /etc/caddy/Caddyfile  (Caddy gets and renews the HTTPS certificate automatically)
+# Point your domain's A record to the VPS IP first, then: sudo systemctl reload caddy
+forecasters.example.com {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:3000
+}
